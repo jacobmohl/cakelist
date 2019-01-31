@@ -18,13 +18,13 @@ The basic business domain / problem this application have to solve is focused on
 - [ ] As a system, I want to clean up cake request items calculated on the likelihood of the chances for the individual request to be delivered, to minimize the amount of undelivered cake requests items.
 
 ### Business language
-- Team
-- User
-- Cake request item
-- Cake request item status (Not confirmed, confirmed, delivered, canceled)
-- Cake request item reason
-- Vote on cake request item
-- Notification to user
+- 👪 Team
+- 👱 User
+- 🍰 Cake request item
+- 🚦 Cake request item status (Not confirmed, confirmed, delivered, canceled)
+- 📝 Cake request item reason
+- 🗳️ Vote on cake request item
+- 🔔 Notification to user
 
 ### Business logic/rules
 
