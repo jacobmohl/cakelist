@@ -17,9 +17,13 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet test $(buildConfiguration)'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- script: dotnet publish --output $(Build.ArtifactStagingDirectory)
+  displayName: 'dotnet publish'
 
 - task: PublishBuildArtifacts@1
