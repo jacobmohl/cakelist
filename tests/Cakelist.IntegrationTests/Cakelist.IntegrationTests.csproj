@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Cakelist.Business\Cakelist.Business.csproj" />
-    <ProjectReference Include="..\src\Cakelist.Infrastructure\Cakelist.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Cakelist.Business\Cakelist.Business.csproj" />
+    <ProjectReference Include="..\..\src\Cakelist.Infrastructure\Cakelist.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
