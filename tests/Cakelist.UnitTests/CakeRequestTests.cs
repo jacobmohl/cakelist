@@ -10,21 +10,21 @@ namespace Cakelist.UnitTests
     {
 
         private readonly User _fakeCreator = new User {
-            Id = Guid.NewGuid(),
+            Id = "1",
             FirstName = "Tony",
             LastName = "Stark",
             Email = "tony@avengers.com"
         };
 
         private readonly User _fakeAssignee = new User {
-            Id = Guid.NewGuid(),
+            Id = "2",
             FirstName = "Steven",
             LastName = "Rogers",
             Email = "steven@avengers.com"
         };
 
         private readonly User _fakeVoter = new User {
-            Id = Guid.NewGuid(),
+            Id = "3",
             FirstName = "Bruce",
             LastName = "Banner",
             Email = "bruce@avengers.com"
