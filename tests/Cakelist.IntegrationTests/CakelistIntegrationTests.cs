@@ -23,7 +23,7 @@ namespace Cakelist.IntegrationTests
             using (var context = new CakelistContext(options)) 
             {
                 context.Users.Add(new User() {
-                    Id = "1",
+                    Id = 1,
                     FirstName = "Tony",
                     LastName = "Stark",
                     Email = "tony@avengers.com"

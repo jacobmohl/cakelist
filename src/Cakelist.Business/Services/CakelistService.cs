@@ -7,7 +7,7 @@ using Cakelist.Business.Interfaces;
 
 namespace Cakelist.Business.Services
 {
-    class CakelistService : ICakelistService
+    public class CakelistService : ICakelistService
     {
         private readonly ICakeRequestRepository _cakeRequestRepository;
         private readonly IUserNotificationService _userNotificationService;
@@ -28,7 +28,9 @@ namespace Cakelist.Business.Services
         public async Task<CakeRequest> AddCakeRequestAsync(User createdBy, User assignedTo, string reason)
         {
             var request = new CakeRequest(createdBy, assignedTo, reason);
+
             await _cakeRequestRepository.AddAsync(request);
+
             var subject = "You have been assigned a cake request";
             var message =
                 $"Hello {assignedTo.FullName()}" +
@@ -45,7 +47,7 @@ namespace Cakelist.Business.Services
         }
 
 
-        public async Task<CakeVote> VoteOnCakeRequestAsync(Guid cakeRequestId, User voter)
+        public async Task<CakeVote> VoteOnCakeRequestAsync(int cakeRequestId, User voter)
         {
             var request = await _cakeRequestRepository.GetByIdAsync(cakeRequestId);
             var vote = request.AddVote(voter);

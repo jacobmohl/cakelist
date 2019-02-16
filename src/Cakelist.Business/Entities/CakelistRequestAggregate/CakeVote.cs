@@ -4,12 +4,12 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
 {
     public class CakeVote
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public User CreatedBy { get; set;  }
         public DateTimeOffset CreatedAt { get; set; }
 
-        public string CakeRequestId { get; set; }
-        public CakeRequest CakeRequest { get; set; }
+        public int CakeRequestId { get; set; }
+        //public CakeRequest CakeRequest { get; set; }
 
         public CakeVote() { }
 

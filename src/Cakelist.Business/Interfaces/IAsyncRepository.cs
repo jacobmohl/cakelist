@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Cakelist.Business.Interfaces
 {
-    interface IAsyncRepository<T>
+    public interface IAsyncRepository<T>
     {
-        Task<T> GetByIdAsync(Guid id);
+        Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        Task DeleteAsync(int id);
     }
 }

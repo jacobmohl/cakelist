@@ -7,7 +7,7 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
 {
     public class CakeRequest
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public User CreatedBy { get; set; }
         public DateTimeOffset CreatedAt { get; } = DateTimeOffset.UtcNow;
 
@@ -15,7 +15,7 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
         public string Reason { get; set; }
         public CakeRequestStatus Status { get; set; } = CakeRequestStatus.NotConfirmed;
 
-        public List<CakeVote> Votes { get; set; }
+        public List<CakeVote> Votes { get; set; } = new List<CakeVote>();
 
         public CakeRequest() { }
 
@@ -24,7 +24,6 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
             CreatedBy = createdBy;
             AssignedTo = assignedTo;
             Reason = reason;
-            Votes = new List<CakeVote>();
         }
 
         public CakeVote AddVote(User voter)

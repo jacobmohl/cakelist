@@ -16,6 +16,7 @@ namespace Cakelist.Infrastructure.Data
 
         public DbSet<CakeRequest> Requests { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<CakeVote> Votes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,15 +48,6 @@ namespace Cakelist.Infrastructure.Data
             modelBuilder.Entity<CakeRequest>()
                 .HasKey(r => r.Id);
 
-            // Required fields
-            //modelBuilder.Entity<CakeRequest>()
-            //    .Property(r => r.CreatedBy)
-            //    .IsRequired();
-
-            //modelBuilder.Entity<CakeRequest>()
-            //    .Property(r => r.AssignedTo)
-            //    .IsRequired();
-
             modelBuilder.Entity<CakeRequest>()
                 .Property(r => r.Reason)
                 .IsRequired();
@@ -63,34 +55,28 @@ namespace Cakelist.Infrastructure.Data
 
             // CreatedBy relationship
             modelBuilder.Entity<CakeRequest>()
-                .HasOne(r => r.CreatedBy)
-                .WithMany(u => u.CreatedCakeRequests);
+                .HasOne(r => r.CreatedBy);
 
             // Assigned to relationship
             modelBuilder.Entity<CakeRequest>()
-                .HasOne(r => r.AssignedTo)
-                .WithMany(u => u.AssignedCakeRequests);
+                .HasOne(r => r.AssignedTo);
+
+            modelBuilder.Entity<CakeRequest>()
+                .HasMany(r => r.Votes)
+                .WithOne();
 
             // Define the value conversion for status
             modelBuilder.Entity<CakeRequest>()
                 .Property(r => r.Status)
                 .HasConversion<string>();
 
-
-
             // Define properties for CakeVote
-
             // Define key
             modelBuilder.Entity<CakeVote>()
                 .HasKey(u => u.Id);
 
             modelBuilder.Entity<CakeVote>()
-                .HasOne(v => v.CakeRequest)
-                .WithMany(r => r.Votes);
-
-            modelBuilder.Entity<CakeVote>()
-                .HasOne(v => v.CreatedBy)
-                .WithMany(u => u.Votes);
+                .HasOne(v => v.CreatedBy);
 
 
         }

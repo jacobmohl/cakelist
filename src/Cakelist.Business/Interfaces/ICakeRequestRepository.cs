@@ -5,7 +5,7 @@ using Cakelist.Business.Entities.CakelistRequestAggregate;
 
 namespace Cakelist.Business.Interfaces
 {
-    interface ICakeRequestRepository : IAsyncRepository<CakeRequest>
+    public interface ICakeRequestRepository : IAsyncRepository<CakeRequest>
     {
     }
 }
