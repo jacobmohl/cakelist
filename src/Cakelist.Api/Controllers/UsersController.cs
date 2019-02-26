@@ -27,13 +27,18 @@ namespace Cakelist.Api.Controllers
 
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Get()
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
             return Ok(await _userRepository.ListAllAsync());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<ActionResult<User>> GetById(int id)
         {
 
@@ -52,7 +57,10 @@ namespace Cakelist.Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateUserModel user)
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> Create([FromBody] CreateUserModel user)
         {
             if (!ModelState.IsValid) 
             {

@@ -5,7 +5,9 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
     public class CakeVote
     {
         public int Id { get; set; }
-        public User CreatedBy { get; set;  }
+
+        public int CreatedById { get; set;  }
+        public User CreatedBy { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
 
         public int CakeRequestId { get; set; }
@@ -13,10 +15,10 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
 
         public CakeVote() { }
 
-        public CakeVote(User createdBy)
+        public CakeVote(int createdById)
         {
             CreatedAt = DateTimeOffset.UtcNow;
-            CreatedBy = createdBy;
+            CreatedById = createdById;
         }
 
     }

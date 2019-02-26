@@ -26,6 +26,11 @@ namespace Cakelist.Infrastructure.Data
             modelBuilder.Entity<User>()
                 .HasKey(u => u.Id);
 
+            // Define index (unique email)
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
             // FirstName is required
             modelBuilder.Entity<User>()
                 .Property(u => u.FirstName)
@@ -52,18 +57,20 @@ namespace Cakelist.Infrastructure.Data
                 .Property(r => r.Reason)
                 .IsRequired();
 
-
             // CreatedBy relationship
             modelBuilder.Entity<CakeRequest>()
-                .HasOne(r => r.CreatedBy);
+                .HasOne(r => r.CreatedBy)
+                .WithMany()
+                .HasForeignKey(r => r.CreatedById);
 
             // Assigned to relationship
             modelBuilder.Entity<CakeRequest>()
-                .HasOne(r => r.AssignedTo);
+                .HasOne(r => r.AssignedTo)
+                .WithMany()
+                .HasForeignKey(r => r.AssignedToId);
 
             modelBuilder.Entity<CakeRequest>()
-                .HasMany(r => r.Votes)
-                .WithOne();
+                .HasMany(r => r.Votes);
 
             // Define the value conversion for status
             modelBuilder.Entity<CakeRequest>()
@@ -76,7 +83,9 @@ namespace Cakelist.Infrastructure.Data
                 .HasKey(u => u.Id);
 
             modelBuilder.Entity<CakeVote>()
-                .HasOne(v => v.CreatedBy);
+                .HasOne(v => v.CreatedBy)
+                .WithMany()
+                .HasForeignKey(v => v.CreatedById);
 
 
         }

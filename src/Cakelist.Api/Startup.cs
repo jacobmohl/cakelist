@@ -33,18 +33,29 @@ namespace Cakelist.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Dependency Injection
-            services.AddScoped<ICakelistService, CakelistService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICakeRequestRepository, CakeRequestRepository>();
-            services.AddScoped<IUserNotificationService, UserNotificationService>();
+            services.AddTransient<ICakelistService, CakelistService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICakeRequestRepository, CakeRequestRepository>();
+            services.AddTransient<IUserNotificationService, UserNotificationService>();
 
             // Registeres Swagger document generation
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info { Title = "Cakelist API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info {
+                    Title = "Cakelist API",
+                    Description = "Cakelist management API.",
+                    TermsOfService = "None",
+                    Contact = new Contact {
+                        Name = "Jacob Møhl",
+                        Email = string.Empty,
+                        Url = "https://jacobmohl.dk"
+                    },
+                    Version = "v1"
+                });
             });
 
             // Registers health checks services
             services.AddHealthChecks()
+                // Entity Framework health check
                 .AddDbContextCheck<CakelistContext>();
 
         }
@@ -53,6 +64,7 @@ namespace Cakelist.Api
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment()) {
+                // Show developer exception (YSOD)
                 app.UseDeveloperExceptionPage();
             }
             else {
@@ -60,7 +72,10 @@ namespace Cakelist.Api
                 app.UseHsts();
             }
 
+            // Force HTTPS
             app.UseHttpsRedirection();
+
+            // Use MVC in the request pipeline
             app.UseMvc();
 
             // Use Swashbuckle to genereate OPEN API JSON documentation
@@ -68,7 +83,10 @@ namespace Cakelist.Api
 
             // Use Swashbuckle to make a SwaggerUI client with above documentation
             app.UseSwaggerUI(c => {
+                // Setup SwaggerUI to read the generated swagger file
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
+
+                // Show Operation Ids in the Swagger UI
                 c.DisplayOperationId();
             });
 

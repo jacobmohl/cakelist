@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Cakelist.Api.ViewModels
 {
+    /// <summary>
+    /// API view model to create a user.
+    /// </summary>
     public class CreateUserModel
     {
         [Required]

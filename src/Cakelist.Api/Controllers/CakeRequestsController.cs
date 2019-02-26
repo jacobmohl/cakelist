@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cakelist.Api.ViewModels;
 using Cakelist.Business.Entities.CakelistRequestAggregate;
 using Cakelist.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -15,60 +16,84 @@ namespace Cakelist.Api.Controllers
 
         private readonly ICakelistService _cakelistService;
         private readonly ICakeRequestRepository _cakeRequestRepository;
+        private readonly IUserRepository _userRepository;
 
-        public CakeRequestsController(ICakelistService cakelistService, ICakeRequestRepository cakeRequestRepository)
+        public CakeRequestsController(ICakelistService cakelistService, ICakeRequestRepository cakeRequestRepository, IUserRepository userRepository)
         {
             _cakelistService = cakelistService;
             _cakeRequestRepository = cakeRequestRepository;
+            _userRepository = userRepository;
         }
 
-        // GET api/values
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CakeRequest>>> GetAll()
         {
             return Ok(await _cakelistService.GetCakelist());
         }
 
-        // GET api/values/5
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<CakeRequest>> Get(int id)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<CakeRequest>> GetById(int id)
         {
-            return Ok(await _cakeRequestRepository.GetByIdAsync(id));
+            // Fetch the request
+            var request = await _cakeRequestRepository.GetByIdAsync(id);
+
+            // If non found return 404 - Not found
+            if(request == null) {
+                return NotFound();
+            }
+
+            // Return 200 if found
+            return Ok(request);
         }
 
-        // POST api/values
+
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CakeRequest cakeRequest)
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<CakeRequest>> Create([FromBody] CreateCakeRequestModel cakeRequest)
         {
-            await Task.Run(() => {
-                return Ok();
-            });
 
-            return BadRequest();
+            // Chech if the modelstate / model is valid, if not return 400 - Bad request
+            if (!ModelState.IsValid) {
+                BadRequest(ModelState);
+            }
 
+            // Find users
+            //TODO: Throw if we not find the user
+            var createdBy = await _userRepository.GetByIdAsync(cakeRequest.CreatedByUserId);
+            var assignedTo = await _userRepository.GetByIdAsync(cakeRequest.AssignedToUserId);
+
+            // Create request
+            var createdCakeRequest = await _cakelistService.AddCakeRequestAsync(createdBy, assignedTo, cakeRequest.Reason);
+
+            // Return with a 201 and the cake request
+            return CreatedAtAction(nameof(GetById), new { id = createdCakeRequest.Id }, createdCakeRequest);
         }
 
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] CakeRequest cakeRequest)
-        {
-            await Task.Run(() => {
-                return Ok();
-            });
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> Put(int id, [FromBody] CakeRequest cakeRequest)
+        //{
+        //    await Task.Run(() => {
+        //        return Ok();
+        //    });
 
-            return BadRequest();
-        }
+        //    return BadRequest();
+        //}
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await Task.Run(() => {
-                return Ok();
-            });
-            return BadRequest();
-
-        }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    await Task.Run(() => {
+        //        return Ok();
+        //    });
+        //    return BadRequest();
+        //}
     }
 }

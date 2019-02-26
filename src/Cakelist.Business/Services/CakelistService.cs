@@ -31,17 +31,17 @@ namespace Cakelist.Business.Services
 
             await _cakeRequestRepository.AddAsync(request);
 
-            var subject = "You have been assigned a cake request";
-            var message =
-                $"Hello {assignedTo.FullName()}" +
-                $"You have been assigned a cake request by {createdBy.FullName()} on the Cakelist with the reason: {reason}." +
-                $"Cake request id: {request.Id}" +
-                $"Number of votes: {request.Votes.Count}" +
-                $"" +
-                $"Best regards" +
-                $"Your friendly Cakelist";
+            //var subject = "You have been assigned a cake request";
+            //var message =
+            //    $"Hello {assignedTo.FullName()}" +
+            //    $"You have been assigned a cake request by {createdBy.FullName()} on the Cakelist with the reason: {reason}." +
+            //    $"Cake request id: {request.Id}" +
+            //    $"Number of votes: {request.Votes.Count}" +
+            //    $"" +
+            //    $"Best regards" +
+            //    $"Your friendly Cakelist";
 
-            await _userNotificationService.NotifyUserAsync(assignedTo, subject, message);
+            //await _userNotificationService.NotifyUserAsync(assignedTo, subject, message);
 
             return request;
         }
@@ -50,19 +50,22 @@ namespace Cakelist.Business.Services
         public async Task<CakeVote> VoteOnCakeRequestAsync(int cakeRequestId, User voter)
         {
             var request = await _cakeRequestRepository.GetByIdAsync(cakeRequestId);
+
+            if (request == null) { throw new Exception($"No cake request with id {cakeRequestId} found"); };
+
             var vote = request.AddVote(voter);
 
             await _cakeRequestRepository.UpdateAsync(request);
 
-            var subject = "Your cake request have recieved a vote";
-            var message =
-                $"Hello {request.AssignedTo.FullName()}" +
-                $"You cake request with id: {request.Id} has got a new vote from {voter.FullName()} and has now {request.Votes.Count} votes" +
-                $"" +
-                $"Best regards" +
-                $"Your friendly Cakelist";
+            //var subject = "Your cake request have recieved a vote";
+            //var message =
+            //    $"Hello {request.AssignedTo.FullName()}" +
+            //    $"You cake request with id: {request.Id} has got a new vote from {voter.FullName()} and has now {request.Votes.Count} votes" +
+            //    $"" +
+            //    $"Best regards" +
+            //    $"Your friendly Cakelist";
 
-            await _userNotificationService.NotifyUserAsync(request.AssignedTo, subject, message);
+            //await _userNotificationService.NotifyUserAsync(request.AssignedTo, subject, message);
 
             return vote;
         }

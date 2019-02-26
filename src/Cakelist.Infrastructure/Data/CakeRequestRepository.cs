@@ -23,9 +23,9 @@ namespace Cakelist.Infrastructure.Data
 
         public async Task<CakeRequest> AddAsync(CakeRequest entity)
         {
-            var request = _cakelistContext.Requests.Add(entity);
+            _cakelistContext.Requests.Add(entity);
             await _cakelistContext.SaveChangesAsync();
-            return request.Entity;            
+            return entity;            
         }
 
 
@@ -58,12 +58,12 @@ namespace Cakelist.Infrastructure.Data
 
         public async Task UpdateAsync(CakeRequest entity)
         {
-            var request = await _cakelistContext.Requests.SingleOrDefaultAsync(r => r.Id == entity.Id);
+            //var request = await _cakelistContext.Requests.SingleOrDefaultAsync(r => r.Id == entity.Id);
 
             //TODO: Refactor to update only selected fields
-            request = entity;
+            //request = entity;
 
-            _cakelistContext.Requests.Update(request);
+            _cakelistContext.Requests.Update(entity);
             await _cakelistContext.SaveChangesAsync();
         }
         public async Task DeleteAsync(int id)

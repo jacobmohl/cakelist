@@ -22,9 +22,9 @@ namespace Cakelist.Infrastructure.Data
 
             var users = new User[]
             {
-                new User { Id = 1, FirstName = "Tony", LastName = "Stark", Email = "tony@avengers.com" },
-                new User { Id = 2, FirstName = "Steven", LastName = "Rogers", Email = "steven@avengers.com" },
-                new User { Id = 3, FirstName = "Bruce", LastName = "Banner", Email = "bruce@avengers.com"}
+                new User { FirstName = "Tony", LastName = "Stark", Email = "tony@avengers.com" },
+                new User { FirstName = "Steven", LastName = "Rogers", Email = "steven@avengers.com" },
+                new User { FirstName = "Bruce", LastName = "Banner", Email = "bruce@avengers.com"}
             };
 
             foreach ( User user in users) 
@@ -41,8 +41,8 @@ namespace Cakelist.Infrastructure.Data
                 return;
             };
 
-            var request = new CakeRequest { Id = 1, CreatedBy = users[0], AssignedTo = users[1], Reason = "New shield" };
-            request.AddVote(users[2]);
+            var request = new CakeRequest { CreatedById = 1, AssignedToId = 2, Reason = "New shield" };
+            //request.AddVote(users[2]);
             cakelistContext.Requests.Add(request);
 
             cakelistContext.SaveChanges();

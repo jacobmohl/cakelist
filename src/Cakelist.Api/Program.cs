@@ -18,6 +18,7 @@ namespace Cakelist.Api
         {
             var host = CreateWebHostBuilder(args).Build();
 
+            // Seed the database with test data. 
             using (var scope = host.Services.CreateScope()) {
                 var services = scope.ServiceProvider;
                 try {
