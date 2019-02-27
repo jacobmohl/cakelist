@@ -50,7 +50,7 @@ namespace Cakelist.UnitTests
             // Act
             cakeRequest.AddVote(_fakeVoter);
 
-            var voterId = cakeRequest.Votes.First().CreatedBy.Id;
+            var voterId = cakeRequest.Votes.First().CreatedById;
 
             // Assert
             Assert.Equal(_fakeVoter.Id, voterId);
