@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.IntegrationTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Api", "src\Cakelist.Api\Cakelist.Api.csproj", "{46AAAD97-557D-4533-9EA9-18F03C91E339}"
 EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Cakelist.Azure", "src\Cakelist.Azure\Cakelist.Azure.deployproj", "{76A21C4F-B968-46A8-8351-C7DC8A2966AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{46AAAD97-557D-4533-9EA9-18F03C91E339}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46AAAD97-557D-4533-9EA9-18F03C91E339}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46AAAD97-557D-4533-9EA9-18F03C91E339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76A21C4F-B968-46A8-8351-C7DC8A2966AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76A21C4F-B968-46A8-8351-C7DC8A2966AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76A21C4F-B968-46A8-8351-C7DC8A2966AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76A21C4F-B968-46A8-8351-C7DC8A2966AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
