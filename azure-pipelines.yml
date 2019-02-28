@@ -23,7 +23,11 @@ steps:
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- script: dotnet publish ~/src/Cakelist.Api/Cakelist.Api.csproj --output $(Build.ArtifactStagingDirectory)
-  displayName: 'dotnet publish'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '/src/Cakelist.Api/Cakelist.Api.csproj --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
 
 - task: PublishBuildArtifacts@1
