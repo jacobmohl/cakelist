@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Cakelist.Api.ViewModels;
+using Cakelist.Api.ApiModels;
 using Cakelist.Business.Entities.CakelistRequestAggregate;
 using Cakelist.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;

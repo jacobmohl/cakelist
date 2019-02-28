@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Cakelist.Api.ViewModels;
+using Cakelist.Api.ApiModels;
 using Cakelist.Business.Entities;
 using Cakelist.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -78,16 +78,14 @@ namespace Cakelist.Api.Controllers
 
         }
 
+
+        //TODO: Create PUT and PATH endpoints
+
         //// PUT api/values/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] User user)
         //{
         //}
 
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

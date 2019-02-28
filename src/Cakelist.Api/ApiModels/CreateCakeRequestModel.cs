@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cakelist.Api.ViewModels
+namespace Cakelist.Api.ApiModels
 {
     /// <summary>
     /// API model to create a cake request.

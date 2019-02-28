@@ -18,7 +18,7 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
         public string Reason { get; set; }
         public CakeRequestStatus Status { get; set; }
 
-        public List<CakeVote> Votes { get; set; }
+        public List<CakeVote> Votes { get; set; } = new List<CakeVote>();
 
         public CakeRequest() { }
 
@@ -35,7 +35,7 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
         public CakeVote AddVote(User voter)
         {
             // Implementation of busniess logic requirment #L1, see README.md
-            if (Votes.Any(v => v.CreatedById == voter.Id)) { throw new VoterHasVotedException("User has already voted on this cake request."); };
+            if (Votes != null && Votes.Any(v => v.CreatedById == voter.Id)) { throw new VoterHasVotedException("User has already voted on this cake request."); };
 
             // Implementation of busniess logic requirment #L2, see README.md
             if (voter.Id == CreatedById) { throw new VoterIsCreatorException("User cant vote in his/her own cake request."); };

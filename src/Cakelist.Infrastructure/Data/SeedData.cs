@@ -42,12 +42,11 @@ namespace Cakelist.Infrastructure.Data
             };
 
             var request = new CakeRequest { CreatedById = 1, AssignedToId = 2, Reason = "New shield" };
-            //request.AddVote(users[2]);
+            request.AddVote(users[2]);
+
             cakelistContext.Requests.Add(request);
 
             cakelistContext.SaveChanges();
-
-
         }      
     }
 }

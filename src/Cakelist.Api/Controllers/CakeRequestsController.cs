@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Cakelist.Api.ViewModels;
+using Cakelist.Api.ApiModels;
 using Cakelist.Business.Entities.CakelistRequestAggregate;
 using Cakelist.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -77,6 +77,8 @@ namespace Cakelist.Api.Controllers
         }
 
 
+        //TODO: Create PUT/PATCH endpoint
+
         //[HttpPut("{id}")]
         //public async Task<IActionResult> Put(int id, [FromBody] CakeRequest cakeRequest)
         //{
@@ -86,6 +88,8 @@ namespace Cakelist.Api.Controllers
 
         //    return BadRequest();
         //}
+
+        //TODO: Create complete endpoint (Cake have been given)
 
         //[HttpDelete("{id}")]
         //public async Task<IActionResult> Delete(int id)
