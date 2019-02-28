@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.IntegrationTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Api", "src\Cakelist.Api\Cakelist.Api.csproj", "{46AAAD97-557D-4533-9EA9-18F03C91E339}"
 EndProject
-Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Cakelist.Azure", "src\Cakelist.Azure\Cakelist.Azure.deployproj", "{76A21C4F-B968-46A8-8351-C7DC8A2966AE}"
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Cakelist.Azure", "deployment\Cakelist.Azure\Cakelist.Azure.deployproj", "{76A21C4F-B968-46A8-8351-C7DC8A2966AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
