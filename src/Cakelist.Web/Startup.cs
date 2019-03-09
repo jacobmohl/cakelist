@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace Cakelist.Web
 {
@@ -18,8 +19,11 @@ namespace Cakelist.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // Setup EF Core context
-            services.AddDbContext<CakelistContext>(options => options.UseInMemoryDatabase("CakelistDB"));
+            // Setup EF Core context - InMemory
+            //services.AddDbContext<CakelistContext>(options => options.UseInMemoryDatabase("CakelistDB"));
+
+            var connectionString = "Server=tcp:jacobmohl-prod.database.windows.net,1433;Initial Catalog=Cakelist;Persist Security Info=False;User ID=jacobmohlSqlAdmin;Password=HuPU6xN9AkrQNXXe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            services.AddDbContext<CakelistContext>(options => options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

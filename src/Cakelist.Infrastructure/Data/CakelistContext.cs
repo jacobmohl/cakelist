@@ -61,21 +61,26 @@ namespace Cakelist.Infrastructure.Data
             modelBuilder.Entity<CakeRequest>()
                 .HasOne(r => r.CreatedBy)
                 .WithMany()
-                .HasForeignKey(r => r.CreatedById);
+                .HasForeignKey(r => r.CreatedById)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Assigned to relationship
             modelBuilder.Entity<CakeRequest>()
                 .HasOne(r => r.AssignedTo)
                 .WithMany()
-                .HasForeignKey(r => r.AssignedToId);
+                .HasForeignKey(r => r.AssignedToId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<CakeRequest>()
-                .HasMany(r => r.Votes);
+                .HasMany(r => r.Votes)
+                .WithOne()
+                .HasForeignKey(v => v.CakeRequestId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Define the value conversion for status
             modelBuilder.Entity<CakeRequest>()
                 .Property(r => r.Status)
-                .HasConversion<string>();
+                .HasConversion<string>();               
 
             // Define properties for CakeVote
             // Define key
@@ -85,7 +90,8 @@ namespace Cakelist.Infrastructure.Data
             modelBuilder.Entity<CakeVote>()
                 .HasOne(v => v.CreatedBy)
                 .WithMany()
-                .HasForeignKey(v => v.CreatedById);
+                .HasForeignKey(v => v.CreatedById)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
         }

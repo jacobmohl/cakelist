@@ -25,8 +25,13 @@ namespace Cakelist.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // Setup EF Core context
-            services.AddDbContext<CakelistContext>(options => options.UseInMemoryDatabase("CakelistDB"));
+
+            // Setup EF Core context - InMemory
+            //services.AddDbContext<CakelistContext>(options => options.UseInMemoryDatabase("CakelistDB"));
+
+            // Setup EF Core context - SQL
+            var connectionString = "Server=tcp:jacobmohl-prod.database.windows.net,1433;Initial Catalog=Cakelist;Persist Security Info=False;User ID=jacobmohlSqlAdmin;Password=HuPU6xN9AkrQNXXe;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            services.AddDbContext<CakelistContext>(options => options.UseSqlServer(connectionString, x => x.MigrationsAssembly("Cakelist.Infrastructure")));
 
 
             // Register MVC
