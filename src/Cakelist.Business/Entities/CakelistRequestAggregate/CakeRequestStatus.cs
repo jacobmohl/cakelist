@@ -2,6 +2,9 @@
 {
     public enum CakeRequestStatus
     {
-        NotConfirmed, Confirmed, Given, Cancelled
+        NotConfirmed,
+        Confirmed,
+        Given,
+        Cancelled
     }
 }

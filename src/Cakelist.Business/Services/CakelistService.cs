@@ -31,17 +31,17 @@ namespace Cakelist.Business.Services
 
             await _cakeRequestRepository.AddAsync(request);
 
-            //var subject = "You have been assigned a cake request";
-            //var message =
-            //    $"Hello {assignedTo.FullName()}" +
-            //    $"You have been assigned a cake request by {createdBy.FullName()} on the Cakelist with the reason: {reason}." +
-            //    $"Cake request id: {request.Id}" +
-            //    $"Number of votes: {request.Votes.Count}" +
-            //    $"" +
-            //    $"Best regards" +
-            //    $"Your friendly Cakelist";
+            var subject = "You have been assigned a cake request";
+            var message =
+                $"Hello {assignedTo.FullName()}" +
+                $"You have been assigned a cake request by {createdBy.FullName()} on the Cakelist with the reason: {reason}." +
+                $"Cake request id: {request.Id}" +
+                $"Number of votes: {request.Votes.Count}" +
+                $"" +
+                $"Best regards" +
+                $"Your friendly Cakelist";
 
-            //await _userNotificationService.NotifyUserAsync(assignedTo, subject, message);
+            await _userNotificationService.NotifyUserAsync(assignedTo, subject, message);
 
             return request;
         }

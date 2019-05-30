@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cakelist.Business.Exceptions;
 
 namespace Cakelist.Business.Entities.CakelistRequestAggregate
 {
@@ -12,6 +13,7 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
 
         public int CreatedById { get; set; }
         public User CreatedBy { get; set; }
+
         public int AssignedToId { get; set; }
         public User AssignedTo { get; set; }
 

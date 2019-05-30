@@ -30,8 +30,9 @@ namespace Cakelist.Api.Controllers
         [ProducesResponseType(500)]
         public async Task<ActionResult<IEnumerable<CakeVote>>> GetAll([FromQuery, Required] int cakeRequestId)
         {
-
+            //TODO: Implement  
             await Task.Run(() => {
+                throw new NotImplementedException();
                 return Ok(new List<CakeVote>());
             });
 

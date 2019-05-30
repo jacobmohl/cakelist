@@ -14,7 +14,6 @@ namespace Cakelist.Business.Entities
 
         //public List<CakeRequest> AssignedCakeRequests { get; set; }
         //public List<CakeRequest> CreatedCakeRequests { get; set; }
-
         //public List<CakeVote> Votes { get; set; }
 
         public string FullName()

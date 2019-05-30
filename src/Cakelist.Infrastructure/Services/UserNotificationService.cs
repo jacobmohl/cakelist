@@ -10,18 +10,18 @@ namespace Cakelist.Infrastructure.Services
 {
     public class UserNotificationService : IUserNotificationService
     {
-        private readonly ILogger _logger;
+        private readonly ILogger _log;
 
         public UserNotificationService(ILogger<UserNotificationService> logger)
         {
-            _logger = logger;
+            _log = logger;
         }
 
         public async Task NotifyUserAsync(User user, string subject, string message)
         {
 
             //TODO: Find a way to notify the user
-            _logger.LogInformation($"Notify user {user.FullName()}");
+            _log.LogInformation($"Notify user {user.FullName()}");
 
             await Task.Run(() => { });
         }

@@ -3,6 +3,7 @@ using Xunit;
 using Cakelist.Business.Entities;
 using Cakelist.Business.Entities.CakelistRequestAggregate;
 using System.Linq;
+using Cakelist.Business.Exceptions;
 
 namespace Cakelist.UnitTests
 {

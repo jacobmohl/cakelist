@@ -11,7 +11,6 @@ namespace Cakelist.Business.Entities.CakelistRequestAggregate
         public DateTimeOffset CreatedAt { get; set; }
 
         public int CakeRequestId { get; set; }
-        //public CakeRequest CakeRequest { get; set; }
 
         public CakeVote() { }
 

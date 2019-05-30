@@ -20,13 +20,13 @@ The basic business domain / problem this application have to solve is focused on
 - [ ] #S7 As a system, I want to clean up cake request items calculated on the likelihood of the chances for the individual request to be delivered, to minimize the amount of undelivered cake requests items.
 
 ### Business language
-- 👪 Team
-- 👱 User
-- 🍰 Cake request
-- 🚦 Cake request status (Not confirmed, confirmed, delivered, canceled)
-- 📝 Cake request reason
-- 🗳️ Vote on cake request
-- 🔔 Notification to user
+👪 Team : Where multiple users can be added do.
+👱 User : Who can assign og be assigned cake requests.
+🍰 Cake request : A request to bake/buy cake for the team for a reason.
+🚦 Cake request status (Not confirmed, confirmed, delivered, canceled)
+📝 Cake request reason : The reason for the cake request.
+🗳️ Vote on cake request : Users in a team can vote on reqeusts for make it eligible 
+🔔 Notification to user : Users can get several notifications (ex. when he/she is assigned a request, new vote ect.)
 
 ### Business logic requirement
 
@@ -35,8 +35,8 @@ The basic business domain / problem this application have to solve is focused on
 - [X] #L3 A user can't vote on a cake requests assign to him/her (assigned to) 
 
 ## Tech
-- ASP.NET 2.2
-- .NET 2.2
+- ASP.NET Core 2.2
+- .NET Core 2.2
 - .Net Standard
 
 ### Dependencires
