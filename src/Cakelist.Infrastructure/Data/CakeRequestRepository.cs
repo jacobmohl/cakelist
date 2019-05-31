@@ -23,7 +23,7 @@ namespace Cakelist.Infrastructure.Data
 
         public async Task<CakeRequest> AddAsync(CakeRequest entity)
         {
-            _log.LogInformation($"Adding cake request from {entity.CreatedBy.FullName()} to {entity.AssignedTo.FullName()}");
+            _log.LogInformation($"Adding cake request from user id {entity.CreatedById} to user id {entity.AssignedToId}");
             _cakelistContext.Requests.Add(entity);
             await _cakelistContext.SaveChangesAsync();
             _log.LogInformation($"Added cake request with id: {entity.Id}");

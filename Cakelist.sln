@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28527.54
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Web", "src\Cakelist.Web\Cakelist.Web.csproj", "{E448222A-165D-4C67-BE15-6869B26EF12D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Business", "src\Cakelist.Business\Cakelist.Business.csproj", "{C794DD27-2F70-4E36-A0F2-A784BFB5EFD1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Infrastructure", "src\Cakelist.Infrastructure\Cakelist.Infrastructure.csproj", "{F3EFF36B-A7FE-48D7-8A63-20C114382A53}"
@@ -14,7 +12,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F82D2D4-6F2D-4985-B93C-318F85A7F3C8}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		azure-pipelines.yml = azure-pipelines.yml
+		global.json = global.json
+		INSTALL.md = INSTALL.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -24,16 +25,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Api", "src\Cakelis
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Cakelist.Azure", "deployment\Cakelist.Azure\Cakelist.Azure.deployproj", "{76A21C4F-B968-46A8-8351-C7DC8A2966AE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Web", "src\Cakelist.Web\Cakelist.Web.csproj", "{36FBAC0D-3AE7-4D44-AD00-8213DFD7B417}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E448222A-165D-4C67-BE15-6869B26EF12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E448222A-165D-4C67-BE15-6869B26EF12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E448222A-165D-4C67-BE15-6869B26EF12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E448222A-165D-4C67-BE15-6869B26EF12D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C794DD27-2F70-4E36-A0F2-A784BFB5EFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C794DD27-2F70-4E36-A0F2-A784BFB5EFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C794DD27-2F70-4E36-A0F2-A784BFB5EFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,6 +57,10 @@ Global
 		{76A21C4F-B968-46A8-8351-C7DC8A2966AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76A21C4F-B968-46A8-8351-C7DC8A2966AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76A21C4F-B968-46A8-8351-C7DC8A2966AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36FBAC0D-3AE7-4D44-AD00-8213DFD7B417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36FBAC0D-3AE7-4D44-AD00-8213DFD7B417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36FBAC0D-3AE7-4D44-AD00-8213DFD7B417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36FBAC0D-3AE7-4D44-AD00-8213DFD7B417}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

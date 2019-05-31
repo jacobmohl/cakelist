@@ -11,17 +11,21 @@
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Cakelist.Business\Cakelist.Business.csproj" />
-    <ProjectReference Include="..\Cakelist.Infrastructure\Cakelist.Infrastructure.csproj" />
+    <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.3" />
+    <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Cakelist.Business\Cakelist.Business.csproj" />
+    <ProjectReference Include="..\Cakelist.Infrastructure\Cakelist.Infrastructure.csproj" />
+  </ItemGroup>
+  
   <PropertyGroup>
     <UserSecretsId>685e2bcc-f10d-41d4-9e8c-7e508bfb5a50</UserSecretsId>
   </PropertyGroup>

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Cakelist.Infrastructure;
 
 namespace Cakelist.Api
 {
@@ -36,11 +37,7 @@ namespace Cakelist.Api
             // Register MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            // Dependency Injection
-            services.AddTransient<ICakelistService, CakelistService>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<ICakeRequestRepository, CakeRequestRepository>();
-            services.AddTransient<IUserNotificationService, UserNotificationService>();
+            Cakelist.Infrastructure.Startup.SetupDependencyInjection(services);
 
             // Registeres Swagger document generation
             services.AddSwaggerGen(c => {
@@ -63,6 +60,8 @@ namespace Cakelist.Api
                 .AddDbContextCheck<CakelistContext>();
 
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

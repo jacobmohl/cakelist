@@ -2,3 +2,5 @@ dotnet ef migrations add <INSERTNAME> --project Cakelist.Infrastructure --startu
 
 
 dotnet ef database update --startup-project Cakelist.Api
+
+Add UserSecrets
