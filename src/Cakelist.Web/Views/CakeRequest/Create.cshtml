@@ -8,12 +8,12 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CreatedByUserId" class="control-label"></label>
-                <input asp-for="CreatedByUserId" class="form-control" />
+                <vc:user-select select-for="CreatedByUserId"></vc:user-select>
                 <span asp-validation-for="CreatedByUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AssignedToUserId" class="control-label"></label>
-                <input asp-for="AssignedToUserId" class="form-control" />
+                <vc:user-select select-for="AssignedToUserId"></vc:user-select>
                 <span asp-validation-for="AssignedToUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
