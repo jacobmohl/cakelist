@@ -56,7 +56,6 @@ namespace Cakelist.Api
                         new DefaultKeyVaultSecretManager());
                 }
             })
-            .UseApplicationInsights()
             .UseStartup<Startup>();
     }
 }

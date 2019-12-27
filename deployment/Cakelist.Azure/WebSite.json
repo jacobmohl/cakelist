@@ -6,6 +6,18 @@
       "type": "string",
       "minLength": 1
     },
+    "environment": {
+      "type": "string",
+      "defaultValue": "dev",
+      "allowedValues": [
+        "prod",
+        "test",
+        "dev"
+      ],
+      "metadata": {
+        "description": "Select the environment."
+      }
+    },
     "skuName": {
       "type": "string",
       "defaultValue": "F1",
@@ -37,10 +49,10 @@
     }
   },
   "variables": {
-    "hostingPlanName": "[concat(parameters('siteName'),'-plan')]",
-    "webApiName": "[concat(parameters('siteName'),'Api')]",
-    "webSiteName": "[concat(parameters('siteName'),'Web')]",
-    "applicationInsightName": "[concat(parameters('siteName'),'-insight')]"
+    "hostingPlanName": "[concat('azplan-',parameters('siteName'),'-',parameters('environment'))]",
+    "webApiName": "[concat('azapp-',parameters('siteName'),'api','-',parameters('environment'))]",
+    "webSiteName": "[concat('azapp-',parameters('siteName'),'web','-',parameters('environment'))]",
+    "applicationInsightName": "[concat('ins-',parameters('siteName'))]"
   },
   "resources": [
     {
@@ -64,6 +76,9 @@
       "name": "[variables('webApiName')]",
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "Web Api"
+      },
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
       ],
@@ -77,6 +92,9 @@
       "name": "[variables('webSiteName')]",
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "Website"
+      },
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
       ],
@@ -90,6 +108,9 @@
       "name": "[variables('applicationInsightName')]",
       "type": "Microsoft.Insights/components",
       "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "Application Insight"
+      },
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites/', variables('webApiName'))]"
       ],

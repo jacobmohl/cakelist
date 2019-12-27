@@ -26,6 +26,7 @@ namespace Cakelist.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddApplicationInsightsTelemetry();
 
             // Setup EF Core context - InMemory
             //services.AddDbContext<CakelistContext>(options => options.UseInMemoryDatabase("CakelistDB"));
