@@ -13,8 +13,10 @@ namespace Cakelist.Api.ApiModels
     {
         [Required]
         public int CreatedByUserId { get; set; }
+
         [Required]
         public int AssignedToUserId { get; set; }
+
         [Required]
         public string Reason { get; set; }
     }

@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Cakelist.Api.ApiModels;
 using Cakelist.Business.Entities;
 using Cakelist.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 
 namespace Cakelist.Api.Controllers
 {
 
-    [Route("[controller]")]
     [ApiController]
-    public class UsersController : Controller
+    [Route("[controller]")]
+    public class UsersController : ControllerBase
     {
 
         private readonly IUserRepository _userRepository;
@@ -26,20 +28,35 @@ namespace Cakelist.Api.Controllers
         }
 
         // GET api/values
-        [HttpGet]
-        [ProducesResponseType(200)]
+        /// <summary>
+        /// Retrieve all active users, with no additional data
+        /// </summary>
+        /// <returns>List of User objects</returns>
+        /// <response code="200">List of users</response>
+        /// <response code="500">Oops! Something unexpected happened serverside.</response>
+        [HttpGet(Name = "GetAllUsers")]
+        [ProducesResponseType(typeof(IEnumerable<User>), 200)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<IEnumerable<User>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
+            //TODO: Could be extended with possibility to fetch cakerequests and votes.
             return Ok(await _userRepository.ListAllAsync());
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        [ProducesResponseType(200)]
+        /// <summary>
+        /// Get a specific user by its id.
+        /// </summary>
+        /// <param name="id">User id</param>
+        /// <returns>User object</returns>
+        /// <response code="200">User object</response>
+        /// <response code="200">Could not find user with specified id</response>
+        /// <response code="500">Oops! Something unexpected happened serverside.</response>
+        [HttpGet("{id}", Name = "GetUserById")]
+        [ProducesResponseType(typeof(User), 200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<User>> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
 
             // Fetch a user
@@ -56,16 +73,22 @@ namespace Cakelist.Api.Controllers
         }
 
         // POST api/values
-        [HttpPost]
-        [ProducesResponseType(201)]
+        /// <summary>
+        /// Create a user and persists it.s
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        /// <response code="201">User created</response>
+        /// <response code="400">The input is not valid.</response>
+        /// <response code="500">Oops! Something unexpected happened serverside.</response>
+        [HttpPost(Name = "CreateUser")]
+        [ProducesResponseType(typeof(User), 201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> Create([FromBody] CreateUserModel user)
         {
-            if (!ModelState.IsValid) 
-            {
-                BadRequest(ModelState);
-            }
+
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
             var createdUser = await _userRepository.AddAsync(
                 new User {
@@ -74,12 +97,12 @@ namespace Cakelist.Api.Controllers
                     Email = user.Email
                 });
 
-            return CreatedAtAction(nameof(GetById), new { id = createdUser.Id }, createdUser);
+            return CreatedAtAction(nameof(GetById), new { Id = createdUser.Id }, createdUser);
 
         }
 
 
-        //TODO: Create PUT and PATH endpoints
+        //TODO: Update user with PUT
 
         //// PUT api/values/5
         //[HttpPut("{id}")]

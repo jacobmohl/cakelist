@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cakelist.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Cakelist.Api.ApiModels.CreateCakeRequestModel">
+            <summary>
+            API model to create a cake request.
+            </summary>
+        </member>
+        <member name="T:Cakelist.Api.ApiModels.CreateUserModel">
+            <summary>
+            API view model to create a user.
+            </summary>
+        </member>
+        <member name="T:Cakelist.Api.ApiModels.CreateVoteModel">
+            <summary>
+            API view model to create a vote on a Cake request.
+            </summary>
+        </member>
+        <member name="M:Cakelist.Api.Controllers.CakeRequestsController.GetAll">
+            <summary>
+            Retrieve all cakerequests, also known as the 'Cakelist'.
+            </summary>
+            <returns>List of Cake request objects.</returns>
+            <response code="200">Returns the cakelist</response>
+            <response code="500">Oops! Something unexpected happened serverside</response>
+        </member>
+        <member name="M:Cakelist.Api.Controllers.CakeRequestsController.GetById(System.Int32)">
+            <summary>
+            Get a specific cake request by its id.
+            </summary>
+            <param name="id">Cake request id.</param>
+            <returns>Cake request object.</returns>
+            <response code="200">Cake request</response>
+            <response code="404">No cake request found with the specified id</response>
+            <response code="500">Oops! Something unexpected happened serverside</response>
+        </member>
+        <member name="M:Cakelist.Api.Controllers.CakeRequestsController.Create(Cakelist.Api.ApiModels.CreateCakeRequestModel)">
+            <summary>
+            Create cake request.
+            </summary>
+            <param name="cakeRequest">Object to contain id of the creator and assignee together with a reason for the cake request.</param>
+            <returns>The created cake request object.</returns>
+            <response code="201">Cake request created</response>
+            <response code="400">The input is not valid or the user id is incorrect</response>
+            <response code="500">Oops! Something unexpected happened serverside.</response>
+        </member>
+        <member name="M:Cakelist.Api.Controllers.UsersController.GetAll">
+            <summary>
+            Retrieve all active users, with no additional data
+            </summary>
+            <returns>List of User objects</returns>
+            <response code="200">List of users</response>
+            <response code="500">Oops! Something unexpected happened serverside.</response>
+        </member>
+        <member name="M:Cakelist.Api.Controllers.UsersController.GetById(System.Int32)">
+            <summary>
+            Get a specific user by its id.
+            </summary>
+            <param name="id">User id</param>
+            <returns>User object</returns>
+            <response code="200">User object</response>
+            <response code="200">Could not find user with specified id</response>
+            <response code="500">Oops! Something unexpected happened serverside.</response>
+        </member>
+        <member name="M:Cakelist.Api.Controllers.UsersController.Create(Cakelist.Api.ApiModels.CreateUserModel)">
+            <summary>
+            Create a user and persists it.s
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+            <response code="201">User created</response>
+            <response code="400">The input is not valid.</response>
+            <response code="500">Oops! Something unexpected happened serverside.</response>
+        </member>
+        <member name="M:Cakelist.Api.Controllers.VotesController.Create(Cakelist.Api.ApiModels.CreateVoteModel)">
+            <summary>
+            Create a vote on a cake request, specified by the user and cake request id.
+            </summary>
+            <param name="createVoteModel">Object to contain user and cake request id.</param>
+            <returns>Created vote object</returns>
+            <response code="201">Vote created</response>
+            <response code="400">Input is not valid or user is not found</response>
+            <response code="500">Oops! Something unexpected happened serverside.</response>
+        </member>
+    </members>
+</doc>

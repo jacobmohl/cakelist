@@ -1,15 +1,11 @@
-﻿using Cakelist.Business.Interfaces;
-using Cakelist.Business.Services;
+﻿using System.IO;
 using Cakelist.Infrastructure.Data;
-using Cakelist.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
-using Cakelist.Infrastructure;
+using Microsoft.Extensions.Hosting;
 
 namespace Cakelist.Api
 {
@@ -23,37 +19,40 @@ namespace Cakelist.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
 
             services.AddApplicationInsightsTelemetry();
 
             // Setup EF Core context - InMemory
-            //services.AddDbContext<CakelistContext>(options => options.UseInMemoryDatabase("CakelistDB"));
+            services.AddDbContext<CakelistContext>(options => options.UseInMemoryDatabase("CakelistDB"));
 
             // Setup EF Core context - SQL
-            services.AddDbContext<CakelistContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CakelistDatabase"), x => x.MigrationsAssembly("Cakelist.Infrastructure")));
+            //services.AddDbContext<CakelistContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CakelistDatabase"), x => x.MigrationsAssembly("Cakelist.Infrastructure")));
 
 
-            // Register MVC
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            // Register MvcCore and some extra parts (for APIs)
+            services.AddMvcCore().AddApiExplorer().AddDataAnnotations();
 
             Cakelist.Infrastructure.Startup.SetupDependencyInjection(services);
 
             // Registeres Swagger document generation
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {
                     Title = "Cakelist API",
                     Description = "Cakelist management API.",
-                    TermsOfService = "None",
-                    Contact = new Contact {
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact {
                         Name = "Jacob Møhl",
                         Email = string.Empty,
-                        Url = "https://jacobmohl.dk"
+                        Url = new System.Uri("https://jacobmohl.dk")
                     },
                     Version = "v1"
                 });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Cakelist.Api.xml");
+                c.IncludeXmlComments(filePath);
             });
+
 
             // Registers health checks services
             services.AddHealthChecks()
@@ -65,7 +64,7 @@ namespace Cakelist.Api
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) {
                 // Show developer exception (YSOD)
@@ -80,7 +79,7 @@ namespace Cakelist.Api
             app.UseHttpsRedirection();
 
             // Use MVC in the request pipeline
-            app.UseMvc();
+            app.UseRouting();
 
             // Use Swashbuckle to genereate OPEN API JSON documentation
             app.UseSwagger();
@@ -94,8 +93,11 @@ namespace Cakelist.Api
                 c.DisplayOperationId();
             });
 
-            // Use Healtch check on below endpoint
-            app.UseHealthChecks("/health");
+
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
+            });
         }
     }
 }
