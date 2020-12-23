@@ -8,6 +8,7 @@ using Cakelist.Business.Entities.CakelistRequestAggregate;
 using Cakelist.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Http;
 
 namespace Cakelist.Api.Controllers
 {
@@ -52,11 +53,9 @@ namespace Cakelist.Api.Controllers
         /// <returns>Created vote object</returns>
         /// <response code="201">Vote created</response>
         /// <response code="400">Input is not valid or user is not found</response>
-        /// <response code="500">Oops! Something unexpected happened serverside.</response>
         [HttpPost(Name = "CreateVote")]
-        [ProducesResponseType(typeof(CakeVote),201)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CakeVote))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody, BindRequired] CreateVoteModel createVoteModel)
         {
 
@@ -64,16 +63,10 @@ namespace Cakelist.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-
             var user = await _userRepository.GetByIdAsync(createVoteModel.CreatedById);
 
             if(user == null) {
-                return BadRequest(new ProblemDetails {
-                    Type = "https://httpstatuses.com/400",
-                    Status = 400,
-                    Title = "Can't find user",
-                    Detail = "CreatedBy user id is not matching any users."
-                });
+                return BadRequest();
             }
 
             var vote = await _cakelistService.VoteOnCakeRequestAsync(createVoteModel.CakeRequestId, user);

@@ -46,10 +46,9 @@ namespace Cakelist.Infrastructure.Data
                 .Property(u => u.Email)
                 .IsRequired();
 
-
             // Define properties for Cakerequest
 
-            /// Key
+            // Key
             modelBuilder.Entity<CakeRequest>()
                 .HasKey(r => r.Id);
 
@@ -93,6 +92,9 @@ namespace Cakelist.Infrastructure.Data
                 .HasForeignKey(v => v.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
+
+
+            // Seed data
 
         }
     }

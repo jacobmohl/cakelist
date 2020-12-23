@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28527.54
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Business", "src\Cakelist.Business\Cakelist.Business.csproj", "{C794DD27-2F70-4E36-A0F2-A784BFB5EFD1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Infrastructure", "src\Cakelist.Infrastructure\Cakelist.Infrastructure.csproj", "{F3EFF36B-A7FE-48D7-8A63-20C114382A53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cakelist.Infrastructure", "src\Cakelist.Infrastructure\Cakelist.Infrastructure.csproj", "{F3EFF36B-A7FE-48D7-8A63-20C114382A53}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.UnitTests", "tests\Cakelist.UnitTests\Cakelist.UnitTests.csproj", "{02A49CC3-EE38-4EED-B072-49A135B197F6}"
 EndProject
@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.IntegrationTests", "tests\Cakelist.IntegrationTests\Cakelist.IntegrationTests.csproj", "{5AE07483-0C1A-4A16-8B26-1B023829288C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cakelist.Api", "src\Cakelist.Api\Cakelist.Api.csproj", "{46AAAD97-557D-4533-9EA9-18F03C91E339}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cakelist.Api", "src\Cakelist.Api\Cakelist.Api.csproj", "{46AAAD97-557D-4533-9EA9-18F03C91E339}"
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "Cakelist.Azure", "deployment\Cakelist.Azure\Cakelist.Azure.deployproj", "{76A21C4F-B968-46A8-8351-C7DC8A2966AE}"
 EndProject

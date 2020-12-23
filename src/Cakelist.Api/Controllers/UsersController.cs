@@ -9,6 +9,7 @@ using Cakelist.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace Cakelist.Api.Controllers
 {
@@ -33,10 +34,8 @@ namespace Cakelist.Api.Controllers
         /// </summary>
         /// <returns>List of User objects</returns>
         /// <response code="200">List of users</response>
-        /// <response code="500">Oops! Something unexpected happened serverside.</response>
         [HttpGet(Name = "GetAllUsers")]
-        [ProducesResponseType(typeof(IEnumerable<User>), 200)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<User>))]
         public async Task<IActionResult> GetAll()
         {
             //TODO: Could be extended with possibility to fetch cakerequests and votes.
@@ -50,12 +49,10 @@ namespace Cakelist.Api.Controllers
         /// <param name="id">User id</param>
         /// <returns>User object</returns>
         /// <response code="200">User object</response>
-        /// <response code="200">Could not find user with specified id</response>
-        /// <response code="500">Oops! Something unexpected happened serverside.</response>
+        /// <response code="404">Could not find user with specified id</response>
         [HttpGet("{id}", Name = "GetUserById")]
-        [ProducesResponseType(typeof(User), 200)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
         {
 
@@ -80,15 +77,15 @@ namespace Cakelist.Api.Controllers
         /// <returns></returns>
         /// <response code="201">User created</response>
         /// <response code="400">The input is not valid.</response>
-        /// <response code="500">Oops! Something unexpected happened serverside.</response>
         [HttpPost(Name = "CreateUser")]
-        [ProducesResponseType(typeof(User), 201)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(User))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] CreateUserModel user)
         {
 
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            if (!ModelState.IsValid || user == null) {
+                return BadRequest(ModelState);
+            }
 
             var createdUser = await _userRepository.AddAsync(
                 new User {

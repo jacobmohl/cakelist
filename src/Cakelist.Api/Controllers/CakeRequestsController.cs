@@ -9,6 +9,7 @@ using Cakelist.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace Cakelist.Api.Controllers
 {
@@ -38,8 +39,7 @@ namespace Cakelist.Api.Controllers
         /// <response code="200">Returns the cakelist</response>
         /// <response code="500">Oops! Something unexpected happened serverside</response>
         [HttpGet(Name = "GetAllCakeRequests")]
-        [ProducesResponseType(typeof(IEnumerable<CakeRequest>), 200)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CakeRequest>))]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _cakelistService.GetCakelist());
@@ -55,9 +55,8 @@ namespace Cakelist.Api.Controllers
         /// <response code="404">No cake request found with the specified id</response>
         /// <response code="500">Oops! Something unexpected happened serverside</response>
         [HttpGet("{id}", Name = "GetCakeRequestById")]
-        [ProducesResponseType(typeof(CakeRequest), 200)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CakeRequest))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([FromRoute, Required] int id)
         {
             // Fetch the request
@@ -82,9 +81,8 @@ namespace Cakelist.Api.Controllers
         /// <response code="400">The input is not valid or the user id is incorrect</response>
         /// <response code="500">Oops! Something unexpected happened serverside.</response>
         [HttpPost(Name = "CreateCakeRequest")]
-        [ProducesResponseType(typeof(CakeRequest), 201)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CakeRequest))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] CreateCakeRequestModel cakeRequest)
         {
 
